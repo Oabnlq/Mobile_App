@@ -325,6 +325,8 @@ public class DeviceControl extends AppCompatActivity {
 
         ImageView imgBao = new ImageView(this);
         imgBao.setImageResource(R.drawable.unknown);
+        layoutShowPerson.addView(imgSang);
+        layoutShowPerson.addView(imgBao);
         try {
             mqttManager.subscribeToTopic("esp/led", AWSIotMqttQos.QOS0,
                     new AWSIotMqttNewMessageCallback() {
@@ -397,12 +399,10 @@ public class DeviceControl extends AppCompatActivity {
                                 @Override
                                 public void run()  {
                                     try {
-
                                         String message = new String(data, "UTF-8");
                                         tvLastMessage.setText(message);
                                         if (message.equals("Sang")) {
                                             sangState = !sangState;
-                                            layoutShowPerson.addView(imgSang);
                                             if(sangState == true){
                                                 imgSang.setVisibility(View.VISIBLE);
                                             }
@@ -414,7 +414,6 @@ public class DeviceControl extends AppCompatActivity {
                                         }
                                         if (message.equals("Bao")) {
                                             baoState = !baoState;
-                                            layoutShowPerson.addView(imgBao);
                                             if(baoState == true){
                                                 imgBao.setVisibility(View.VISIBLE);
                                             }
