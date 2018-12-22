@@ -323,13 +323,13 @@ public class DeviceControl extends AppCompatActivity {
         ImageView imgSang = new ImageView(this);
         imgSang.setImageResource(R.drawable.unknown);
         imgSang.setVisibility(View.INVISIBLE);
-        imgSang.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
+        imgSang.setLayoutParams(new ViewGroup.LayoutParams(300, 300));
         layoutShowPerson.addView(imgSang);
 
         ImageView imgBao = new ImageView(this);
         imgBao.setImageResource(R.drawable.unknown);
         imgBao.setVisibility(View.INVISIBLE);
-        imgBao.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
+        imgBao.setLayoutParams(new ViewGroup.LayoutParams(300, 300));
         layoutShowPerson.addView(imgBao);
 
         layoutContainPerson.addView(layoutShowPerson);
