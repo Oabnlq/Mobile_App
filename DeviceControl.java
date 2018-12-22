@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -316,17 +317,22 @@ public class DeviceControl extends AppCompatActivity {
         LinearLayout layoutContainPerson = (LinearLayout)findViewById(R.id.containPersonLayout);
         LinearLayout layoutShowPerson = new LinearLayout(this);
         layoutShowPerson.setOrientation(LinearLayout.HORIZONTAL);
-        layoutShowPerson.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200));
-        layoutContainPerson.addView(layoutShowPerson);
+        layoutShowPerson.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+        layoutShowPerson.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
 
         ImageView imgSang = new ImageView(this);
         imgSang.setImageResource(R.drawable.unknown);
-
+        imgSang.setVisibility(View.INVISIBLE);
+        imgSang.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
+        layoutShowPerson.addView(imgSang);
 
         ImageView imgBao = new ImageView(this);
         imgBao.setImageResource(R.drawable.unknown);
-        layoutShowPerson.addView(imgSang);
+        imgBao.setVisibility(View.INVISIBLE);
+        imgBao.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
         layoutShowPerson.addView(imgBao);
+
+        layoutContainPerson.addView(layoutShowPerson);
         try {
             mqttManager.subscribeToTopic("esp/led", AWSIotMqttQos.QOS0,
                     new AWSIotMqttNewMessageCallback() {
@@ -401,6 +407,15 @@ public class DeviceControl extends AppCompatActivity {
                                     try {
                                         String message = new String(data, "UTF-8");
                                         tvLastMessage.setText(message);
+                                        if (message.equals("Bao")) {
+                                            baoState = !baoState;
+                                            if(baoState == true){
+                                                imgBao.setVisibility(View.VISIBLE);
+                                            }
+                                            else{
+                                                imgBao.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
                                         if (message.equals("Sang")) {
                                             sangState = !sangState;
                                             if(sangState == true){
@@ -409,16 +424,7 @@ public class DeviceControl extends AppCompatActivity {
                                             else{
 //                                                layoutShowPerson.removeView(imgSang);
 //                                                layoutContainPerson.removeView(layoutShowPerson);
-                                                imgSang.setVisibility(View.GONE);
-                                            }
-                                        }
-                                        if (message.equals("Bao")) {
-                                            baoState = !baoState;
-                                            if(baoState == true){
-                                                imgBao.setVisibility(View.VISIBLE);
-                                            }
-                                            else{
-                                                imgBao.setVisibility(View.GONE);
+                                                imgSang.setVisibility(View.INVISIBLE);
                                             }
                                         }
                                     } catch (UnsupportedEncodingException e) {}
