@@ -307,7 +307,7 @@ public class DeviceControl extends AppCompatActivity {
                     });
                 }
             });
-            subscribe();
+            //subscribe();
         } catch (Exception e) {}
 
 
@@ -317,19 +317,19 @@ public class DeviceControl extends AppCompatActivity {
         LinearLayout layoutContainPerson = (LinearLayout)findViewById(R.id.containPersonLayout);
         LinearLayout layoutShowPerson = new LinearLayout(this);
         layoutShowPerson.setOrientation(LinearLayout.HORIZONTAL);
-        layoutShowPerson.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
-        layoutShowPerson.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
+        layoutShowPerson.setGravity(Gravity.CENTER);
+        layoutShowPerson.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         ImageView imgSang = new ImageView(this);
         imgSang.setImageResource(R.drawable.unknown);
         imgSang.setVisibility(View.INVISIBLE);
-        imgSang.setLayoutParams(new ViewGroup.LayoutParams(300, 300));
+        imgSang.setLayoutParams(new ViewGroup.LayoutParams(600, 600));
         layoutShowPerson.addView(imgSang);
 
         ImageView imgBao = new ImageView(this);
         imgBao.setImageResource(R.drawable.unknown);
         imgBao.setVisibility(View.INVISIBLE);
-        imgBao.setLayoutParams(new ViewGroup.LayoutParams(300, 300));
+        imgBao.setLayoutParams(new ViewGroup.LayoutParams(600, 600));
         layoutShowPerson.addView(imgBao);
 
         layoutContainPerson.addView(layoutShowPerson);
