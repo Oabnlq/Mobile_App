@@ -67,7 +67,7 @@ public class DeviceControl extends AppCompatActivity {
     TextView tvLastMessage;
     TextView tvStatus;
 
-    Button btnSubscribe;
+    //Button btnSubscribe;
     ImageView imageView;
     ImageView imageTemperature;
     ImageView imageHumidity;
@@ -91,8 +91,8 @@ public class DeviceControl extends AppCompatActivity {
         txtTemperature = (TextView) findViewById(R.id.txtTemperature);
         txtHumidity = (TextView) findViewById(R.id.txtHumidity);
 
-        btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
-        btnSubscribe.setOnClickListener(subscribeClick);
+        //btnSubscribe = (Button) findViewById(R.id.btnSubscribe);
+        //btnSubscribe.setOnClickListener(subscribeClick);
 
 
 
@@ -162,6 +162,8 @@ public class DeviceControl extends AppCompatActivity {
         // MQTT client IDs are required to be unique per AWS IoT account.
         // This UUID is "practically unique" but does not _guarantee_
         // uniqueness.
+
+
         clientId = UUID.randomUUID().toString();
 
         // Initialize the AWS Cognito credentials provider
@@ -307,11 +309,8 @@ public class DeviceControl extends AppCompatActivity {
                     });
                 }
             });
-            //subscribe();
+            subscribe();
         } catch (Exception e) {}
-
-
-
     }
     private void subscribe(){
         LinearLayout layoutContainPerson = (LinearLayout)findViewById(R.id.containPersonLayout);
@@ -333,6 +332,7 @@ public class DeviceControl extends AppCompatActivity {
         layoutShowPerson.addView(imgBao);
 
         layoutContainPerson.addView(layoutShowPerson);
+
         try {
             mqttManager.subscribeToTopic("esp/led", AWSIotMqttQos.QOS0,
                     new AWSIotMqttNewMessageCallback() {
@@ -469,12 +469,12 @@ public class DeviceControl extends AppCompatActivity {
                     });
         } catch (Exception e) {}
     }
-    View.OnClickListener subscribeClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            subscribe();
-        }
-    };
+//    View.OnClickListener subscribeClick = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            subscribe();
+//        }
+//    };
 
 //    View.OnClickListener switchLED = new View.OnClickListener() {
 //        @Override
